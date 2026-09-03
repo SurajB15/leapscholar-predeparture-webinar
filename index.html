@@ -163,6 +163,10 @@ html,body{overflow-x:hidden}
 <form id="form" onsubmit="submitForm(event)">
 <div class="group"><label>Full Name *</label><input id="name" required placeholder="Enter your full name"></div>
 <div class="grid2"><div class="group"><label>Mobile Number *</label><input id="phone" required maxlength="10" inputmode="numeric" placeholder="10-digit number"></div><div class="group"><label>Email ID *</label><input id="email" required type="email" placeholder="you@email.com"></div></div>
+<div class="group"><label>Which country are you moving to? *</label><select id="country" required>
+<option value="" disabled selected>Select destination country</option>
+<option>UK</option><option>USA</option><option>Canada</option><option>Ireland</option><option>UAE</option><option>Germany</option><option>New Zealand</option><option>Australia</option><option>France</option><option>Italy</option><option>Spain</option><option>Others</option>
+</select></div>
 <div class="group"><label>Have you booked your accommodation? *</label><div class="radio">
 <label><input type="radio" name="accom" value="Yes - booked" required><span>Yes</span></label>
 <label><input type="radio" name="accom" value="No - not booked"><span>No</span></label>
@@ -247,9 +251,11 @@ async function submitForm(e){
 e.preventDefault();
 const phone=document.getElementById('phone');phone.value=phone.value.replace(/\D/g,'').slice(0,10);
 if(!/^[6-9]\d{9}$/.test(phone.value)){alert('Please enter a valid 10-digit Indian mobile number.');return}
+const country=document.getElementById('country');
+if(!country.value){alert('Please select your destination country.');return}
 const services=[...document.querySelectorAll('input[name="services"]:checked')].map(x=>x.value);
 const accom=document.querySelector('input[name="accom"]:checked');
-const payload={name:document.getElementById('name').value.trim(),phone:phone.value,email:document.getElementById('email').value.trim(),accommodation:accom.value,services:services.join(', '),timestampClient:new Date().toISOString()};
+const payload={name:document.getElementById('name').value.trim(),phone:phone.value,email:document.getElementById('email').value.trim(),country:country.value,accommodation:accom.value,services:services.join(', '),timestampClient:new Date().toISOString()};
 const btn=document.getElementById('submit');btn.disabled=true;btn.textContent='REGISTERING…';
 try{
 if(CONFIG.APPS_SCRIPT_URL.includes('PASTE_YOUR'))throw new Error('Backend not configured');

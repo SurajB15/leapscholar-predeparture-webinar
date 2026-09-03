@@ -4,6 +4,7 @@ This version keeps the landing page focused on webinar registration while also c
 
 ## Form captures
 - Name
+- Country (dropdown: UK, USA, Canada, Ireland, UAE, Germany, New Zealand, Australia, France, Italy, Spain, Others)
 - Mobile
 - Email
 - Accommodation status
