@@ -252,7 +252,7 @@ const accom=document.querySelector('input[name="accom"]:checked');
 const payload={name:document.getElementById('name').value.trim(),phone:phone.value,email:document.getElementById('email').value.trim(),accommodation:accom.value,services:services.join(', '),timestampClient:new Date().toISOString()};
 const btn=document.getElementById('submit');btn.disabled=true;btn.textContent='REGISTERING…';
 try{
-if(CONFIG.APPS_SCRIPT_URL.includes('https://script.google.com/macros/s/AKfycbzXvFi4U-o3BlMYnFNXhbB2mSwKrYs2cnXsyAM-Yj-0HoFJG3S4xfUXW-uG2nJ0C4yG/exec'))throw new Error('Backend not configured');
+if(CONFIG.APPS_SCRIPT_URL.includes('PASTE_YOUR'))throw new Error('Backend not configured');
 const r=await fetch(CONFIG.APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
 const result=await r.json();if(result.status!=='success')throw new Error(result.message||'Registration failed');
 document.getElementById('form').reset();document.getElementById('modal').classList.add('show');
